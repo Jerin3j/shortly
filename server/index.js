@@ -3,10 +3,11 @@ const urlRoute = require("./routes/urls");
 const cors = require('cors')
 const { connectMongoDB } = require("./routes/connect");
 const URL = require("./models/url"); // Importing the URL model
+require('dotenv').config()
 const app = express();
 const PORT = 3001;
 
-connectMongoDB("mongodb://localhost:27017/short-url")
+connectMongoDB(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.error("Failed to connect to MongoDB:", err));
 
