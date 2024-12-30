@@ -18,6 +18,11 @@ const About = () => {
           your links are always available and reliable. We prioritize simplicity,
           speed, and user satisfaction.
         </p>
+        <p className="mt-6 text-lg sm:text-xl leading-relaxed">
+          The founder and creator of this website is Jerin 3j.
+           And Jerin Jerome Justin also knowns as Jerin 3j. 
+           He is Passionate in Full stack developer in MERN stack with high proffiency of TypeScript and Javascript..
+        </p>
       </div>
     </div>
   );

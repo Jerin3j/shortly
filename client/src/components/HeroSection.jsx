@@ -13,7 +13,7 @@ const HeroSection = () => {
         body: JSON.stringify({ url: inputUrl }),
       });
       const data = await response.json();
-      setShortenedUrl(`${window.location.origin}/${data.id}`);
+      setShortenedUrl(`http://localhost:3001/${data.id}`);
     } catch (error) {
       alert("An error occurred while shortening the URL");
     }

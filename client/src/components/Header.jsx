@@ -14,7 +14,7 @@ const Header = () => {
                 Home
               </a>
             </li>
-            <li>
+            <li>  
               <Link to="/about" className="hover:underline">
                 About
               </Link>
