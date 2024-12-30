@@ -7,13 +7,13 @@ const HeroSection = () => {
   const handleShortenUrl = async () => {
     if (!inputUrl) return alert("Please enter a URL");
     try {
-      const response = await fetch("http://localhost:3001/", {
+      const response = await fetch("https://shortly-e9nj.onrender.com/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: inputUrl }),
       });
       const data = await response.json();
-      setShortenedUrl(`http://localhost:3001/${data.id}`);
+      setShortenedUrl(`https://shortly-e9nj.onrender.com/${data.id}`);
     } catch (error) {
       alert("An error occurred while shortening the URL");
     }

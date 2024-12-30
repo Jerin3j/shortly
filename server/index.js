@@ -11,6 +11,11 @@ connectMongoDB(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.error("Failed to connect to MongoDB:", err));
 
+    const corsOptions = {
+        origin: "https://shortly-mern.vercel.app/", // frontend URI (ReactJS)
+    }
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cors())
 app.use(router);
