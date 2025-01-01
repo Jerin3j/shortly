@@ -4,16 +4,35 @@ const HeroSection = () => {
   const [inputUrl, setInputUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
 
+  const isValidUrl = (url) => {
+    const urlPattern = new RegExp(
+      "^(https?:\\/\\/)?" +
+        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|" +
+        "((\\d{1,3}\\.){3}\\d{1,3}))" +
+        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
+        "(\\?[;&a-z\\d%_.~+=-]*)?" +
+        "(\\#[-a-z\\d_]*)?$",
+      "i"
+    );
+    return !!urlPattern.test(url);
+  };
+
   const handleShortenUrl = async () => {
     if (!inputUrl) return alert("Please enter a URL");
+    if (!isValidUrl(inputUrl)) return alert("Please enter a valid URL");
+
     try {
-      const response = await fetch("https://shortly-e9nj.onrender.com/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: inputUrl }),
-      });
+      const response = await fetch(
+        process.env.REACT_APP_BACKEND_URL || "https://shortly-e9nj.onrender.com/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: inputUrl }),
+        }
+      );
+      if (!response.ok) throw new Error("Failed to shorten URL");
       const data = await response.json();
-      setShortenedUrl(`https://shortly-e9nj.onrender.com/${data.id}`);
+      setShortenedUrl(`${process.env.REACT_APP_BACKEND_URL || "https://shortly-e9nj.onrender.com/"}${data.id}`);
     } catch (error) {
       alert("An error occurred while shortening the URL");
     }
@@ -27,7 +46,11 @@ const HeroSection = () => {
           Enter your URL to create a short and memorable link.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <label htmlFor="url-input" className="sr-only">
+            Enter your URL
+          </label>
           <input
+            id="url-input"
             type="text"
             placeholder="Enter your URL here"
             value={inputUrl}
