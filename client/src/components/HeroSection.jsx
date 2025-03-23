@@ -4,6 +4,8 @@ const HeroSection = () => {
   const [inputUrl, setInputUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
 
+  console.log("||process.env.ORIGIN_URL",  window.env.ORIGIN_URL)
+
   const isValidUrl = (url) => {
     const urlPattern = new RegExp(
       "^(https?:\\/\\/)?" +
@@ -23,7 +25,7 @@ const HeroSection = () => {
 
     try {
       const response = await fetch(
-        process.env.REACT_APP_BACKEND_URL || "https://shortly-e9nj.onrender.com/",
+        window.env.ORIGIN_URL,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -32,7 +34,7 @@ const HeroSection = () => {
       );
       if (!response.ok) throw new Error("Failed to shorten URL");
       const data = await response.json();
-      setShortenedUrl(`${process.env.REACT_APP_BACKEND_URL || "https://shortly-e9nj.onrender.com/"}${data.id}`);
+      setShortenedUrl(`${window.env.ORIGIN_URL}${data.id}`);
     } catch (error) {
       alert("An error occurred while shortening the URL");
     }
