@@ -4,8 +4,6 @@ const HeroSection = () => {
   const [inputUrl, setInputUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
 
-  console.log("||process.env.ORIGIN_URL",  window.env.ORIGIN_URL)
-
   const isValidUrl = (url) => {
     const urlPattern = new RegExp(
       "^(https?:\\/\\/)?" +
