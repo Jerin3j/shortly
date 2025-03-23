@@ -60,6 +60,7 @@ const HeroSection = () => {
             className="w-full sm:w-96 px-4 py-3 border border-red-400 rounded focus:outline-none"
           />
           <button
+          onKeyDown={(e)=> e.key === "Enter" && handleShortenUrl}
             onClick={handleShortenUrl}
             className="bg-red-500 text-white px-6 py-3 rounded hover:bg-red-600 transition"
           >
